@@ -4,10 +4,18 @@ const concat               = require('gulp-concat');
 const autoprefixer         = require('gulp-autoprefixer');
 const uglify               = require('gulp-uglify');
 const imagemin             = require('gulp-imagemin');
-const del = require('del');
+const del                  = require('del');
 const browserSync          = require('browser-sync').create();
+const gulp                 = require('gulp');
+const ghPages              = require('gulp-gh-pages');
 
 
+
+
+gulp.task('deploy', function () {
+  return gulp.src('app/')
+    .pipe(ghPages());
+});
 
 
 function browsersync() {
@@ -40,6 +48,7 @@ function styles() {
 
 function scripts() {
   return src([
+    'node_modules/swiper/swiper-bundle.min.js',
     'node_modules/jquery/dist/jquery.js',
     'app/js/main.js'
   ])
